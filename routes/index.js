@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+var csrf = require('csrf');
+var tokens = new csrf();
 const bcrypt = require('bcrypt');
 import LibAuth from "../libs/LibAuth"
+import LibCsrf from "../libs/LibCsrf"
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -29,29 +32,35 @@ router.get('/userlist', function(req, res) {
 * 
 *********************************/
 router.get('/login', function(req, res) {
-  res.render('login', { user : req.user });
+    LibCsrf.set_token(req, res) 
+    res.render('login', { user : "" });
 });
 /******************************** 
 * 
 *********************************/
 router.post('/login', function(req, res){
     try{
+        if(LibCsrf.valid_token(req, res)== false){
+            console.log("error, csrf token");
+            res.redirect('/login')
+        }
         var data = req.body
-        if (data.username === "test" && data.password === "1111") {
-            console.log(data )  
-            let hashed_password = bcrypt.hashSync(data.password, 10);
-            console.log(hashed_password);    
-//            var c1 = bcrypt.compareSync(data.password,  hashed_password )
+//        console.log(data )  
+        let hashed_password = bcrypt.hashSync("1111", 10);
+        if (data.email === "hoge@example.com" && bcrypt.compareSync(data.password,  hashed_password )) 
+        {
+//            console.log(hashed_password);    
             var user = {
-                mail: data.username, password: hashed_password
+                mail: data.email, password: hashed_password
             }
             var json = JSON.stringify( user );
             res.cookie('user', json );
             res.redirect('/')
         }else{
+            console.log("error, login");
             res.clearCookie('user');
             res.redirect('/login')
-        }
+        }        
     } catch (e) {
         console.log(e);
     }

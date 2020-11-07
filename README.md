@@ -6,7 +6,7 @@
 
  date    : 2020/11/04
 
- update : 
+ update :  2020/11/07
 
 ***
 
@@ -14,6 +14,7 @@ node/express( es6 ) ,  auth sample
 
 * 認証、User情報をCookie 保存する。
 * bcrypt で、password暗号化
+* CSRF 対応
 
 ***
 ### setup

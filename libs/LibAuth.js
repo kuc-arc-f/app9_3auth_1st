@@ -1,5 +1,6 @@
 // LibAuth
 
+//
 export default {
     get_user:function(req){
         var ret = [];

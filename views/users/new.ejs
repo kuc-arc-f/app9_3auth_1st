@@ -1,7 +1,7 @@
 <div id="app">
-    <h1>Login</h1>
+    <h1>User add</h1>
     <hr />
-    <form action="/login" method="post">
+    <form action="/users/new" method="post">
         <div>
             <p>
                 <label>mail :<input type="email" name="email" size="30" maxlength="40" required>
@@ -9,12 +9,12 @@
             </p>
         </div>
         <div>
-            <label>パスワード：</label>
-            <input type="password" name="password" required />
+            <label>password：</label>
+            <input type="password" name="password" />
         </div>
         <hr />
         <div>
-            <input type="submit" value="ログイン"/>
+            <input type="submit" value="Save"/>
         </div>
     </form>    
     
@@ -23,3 +23,4 @@
 <!-- -->
 <script>    
 </script>
+

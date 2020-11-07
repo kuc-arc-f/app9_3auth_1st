@@ -1,5 +1,7 @@
 // LibPagenate
+import LibCommon from "../libs/LibCommon"
 
+//
 export default {
     init:function(){
         this.per_page = 20;
@@ -29,5 +31,17 @@ export default {
         //ret = parseInt( num );
         return ret;
 
+    },
+    get_page_items(data, reply_books){
+        var paginate_disp = this.is_paging_display(data.length)
+        const task_items = LibCommon.string_to_obj(reply_books)
+        var page_item = {
+            "item_count":data.length ,"paginate_disp": paginate_disp
+        }
+        var param = {
+             "docs": task_items ,
+             "page_item": page_item,            
+        };
+        return  param;       
     }    
 }

@@ -7,7 +7,7 @@ var session = require('express-session');
 
 //
 var indexRouter = require('./routes/index');
-var userRouter = require('./routes/users');
+// var userRouter = require('./routes/users');
 
 var app = express();
 const expressLayouts = require('express-ejs-layouts');
@@ -45,7 +45,7 @@ app.use(session({
 
 // route
 app.use('/', indexRouter);
-app.use('/users', userRouter );
+// app.use('/users', userRouter );
 // api
 
 // catch 404 and forward to error handler
